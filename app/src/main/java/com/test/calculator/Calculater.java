@@ -212,9 +212,18 @@ public class Calculater extends AppCompatActivity {
         equal.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 String temp =cal.getResult(true);
-                if ((temp.length() >=5 && temp.substring(0,5).equals("error")==false) || temp.length()<5){
+                if (temp.length()<5){
+                    cal.setQuestion(temp);
                     question.setText(temp);
                     result.setText("");
+                }else{
+                    if (temp.substring(0,5).equals("error")==false){
+                        cal.setQuestion(temp);
+                        question.setText(temp);
+                        result.setText("");
+                    }else{
+                        result.setText(temp);
+                    }
                 }
             }
         });
@@ -796,4 +805,7 @@ class Cal{
         s.replace(beg,end,before+ replacement +after);
     }
 
+    public void setQuestion(String temp) {
+        question.replace(0,question.length(),temp);
+    }
 }
